@@ -9,6 +9,13 @@ function App() {
 
   return (
     <>
+      {isSurvey ? (
+        <Survey />
+      ) : (
+        <Welcome 
+          setIsSurvey={setIsSurvey}
+        />
+      )}
     </>
   )
 }
