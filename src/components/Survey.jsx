@@ -13,7 +13,7 @@ function Survey(props) {
         phoneNumber: 0,
         email: "",
         dateOfSurvey: "",
-        campus: "",
+        campus: [],
         interest: "",
         recommend: "",
         comments: ""
@@ -25,7 +25,7 @@ function Survey(props) {
         setUserInfo(prevUserInfo => {
             return {
                 ...prevUserInfo,
-                [name]: event.target.value === "checkbox" ? checked : value
+                [name]: value
             }
         })
     }
@@ -34,18 +34,36 @@ function Survey(props) {
         event.preventDefault()
     }
 
+    function resetForm() {
+        setUserInfo({
+            firstName: "",
+            lastName: "",
+            streetAddress: "",
+            city: "",
+            state: "",
+            zipCode: 0,
+            phoneNumber: 0,
+            email: "",
+            dateOfSurvey: "",
+            campus: [],
+            interest: "",
+            recommend: "",
+            comments: ""
+        })
+    }
+
     return <>
         <form className="survey" onChange={handleChange} onSubmit={handleSubmit}>
             <h1 className="heading"> Survey Form </h1>
-            <input className="survey-input" type="text" placeholder="First Name" required/>
-            <input className="survey-input" type="text" placeholder="Last Name" required/>
-            <input className="survey-input" type="text" placeholder="Street Address" required/>
-            <input className="survey-input" type="text" placeholder="City" required/>
-            <input className="survey-input" type="text" placeholder="State" required/>
-            <input className="survey-input" type="number" placeholder="Zip Code" required/>
-            <input className="survey-input" type="number" placeholder="Phone Number" required/>
-            <input className="survey-input" type="email" placeholder="Email" required/>
-            <input className="survey-input" type="date" placeholder="Date of Survey" required/>
+            <input className="survey-input" type="text" name="firstName" placeholder="First Name" required/>
+            <input className="survey-input" type="text" name="lastName" placeholder="Last Name" required/>
+            <input className="survey-input" type="text" name="streetAddress" placeholder="Street Address" required/>
+            <input className="survey-input" type="text" name="city" placeholder="City" required/>
+            <input className="survey-input" type="text" name="state" placeholder="State" required/>
+            <input className="survey-input" type="number" name="zipCode" placeholder="Zip Code" required/>
+            <input className="survey-input" type="number" name="phoneNumber" placeholder="Phone Number" required/>
+            <input className="survey-input" type="email" name="email" placeholder="Email" required/>
+            <input className="survey-input" type="date" name="dateOfSurvey" placeholder="Date of Survey" required/>
 
             <h4 className="subheading"> What do you like the most about the Campus. </h4>
             <label className="campus">
@@ -107,7 +125,7 @@ function Survey(props) {
 
             <div className="survey-buttons">
                 <button className="submit-btn"> Submit </button>
-                <button className="cancel-btn"> Clear </button>
+                <button className="cancel-btn" onClick={resetForm}> Clear </button>
             </div>
         </form>
     </>
