@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 import "/src/App.css"
 
 function Welcome(props) {
@@ -12,7 +10,7 @@ function Welcome(props) {
                 <li className="team-member"> Manideep Akula - G </li>
                 <li className="team-member"> Naga Shiva Sai Myneni - G </li>
             </ul>
-            <button className="survey-btn" onClick={() => props.setIsSurvey(true)}> Survey Link </button>
+            <button className="survey-btn" onClick={() => props.setIsSurvey("survey")}> Survey Link </button>
         </div>
     </>
 }

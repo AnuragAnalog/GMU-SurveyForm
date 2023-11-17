@@ -17,7 +17,7 @@ function Survey(props) {
         interest: "",
         recommend: "",
         comments: ""
-    })
+      })
 
     function handleChange(event) {
         const { name, value } = event.target
@@ -32,6 +32,7 @@ function Survey(props) {
 
     function handleSubmit(event) {
         event.preventDefault()
+        props.setSurveys(prevSurveys => [...prevSurveys, userInfo])
         event.target.reset()
     }
 
@@ -129,7 +130,7 @@ function Survey(props) {
                 <button className="cancel-btn" onClick={resetForm}> Clear </button>
             </div>
         </form>
-        <button className="back-btn" onClick={() => props.setIsSurvey(false)}> Back </button>
+        <button className="back-btn" onClick={() => props.setIsSurvey("welcome")}> Back </button>
     </>
 }
 
