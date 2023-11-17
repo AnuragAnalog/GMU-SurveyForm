@@ -32,6 +32,7 @@ function Survey(props) {
 
     function handleSubmit(event) {
         event.preventDefault()
+        event.target.reset()
     }
 
     function resetForm() {
@@ -128,6 +129,7 @@ function Survey(props) {
                 <button className="cancel-btn" onClick={resetForm}> Clear </button>
             </div>
         </form>
+        <button className="back-btn" onClick={() => props.setIsSurvey(false)}> Back </button>
     </>
 }
 
