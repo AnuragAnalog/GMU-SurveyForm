@@ -11,6 +11,7 @@ function Welcome(props) {
                 <li className="team-member"> Naga Shiva Sai Myneni - G </li>
             </ul>
             <button className="survey-btn" onClick={() => props.setIsSurvey("survey")}> Survey Link </button>
+            <button className="surveylist-btn" onClick={() => props.setIsSurvey("surveylist")}> Survey List </button>
         </div>
     </>
 }
