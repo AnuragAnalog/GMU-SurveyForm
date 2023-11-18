@@ -5,13 +5,20 @@ import "/src/App.css";
 function SurveyItem(props) {
     const [isExpanded, setIsExpanded] = useState(false);
 
+    function deleteSurvey() {
+        console.log("Deleted");
+    }
+
     return <>
         <div className="survey-item">
             <p className="survey-item-element"> {props.survey.firstName} {props.survey.lastName} </p>
             <p className="survey-item-element"> {props.survey.dateOfSurvey} </p>
             <div className="survey-item-buttons">
-                <button className="survey-item-btn" onClick={() => setIsExpanded(prevIsExpanded => !prevIsExpanded)}>
+                <button className="details-btn" onClick={() => setIsExpanded(prevIsExpanded => !prevIsExpanded)}>
                     {isExpanded ? "Hide Details" : "Show Details"}
+                </button>
+                <button className="delete-btn" onClick={deleteSurvey}>
+                    Delete
                 </button>
             </div>
             {isExpanded && <div className="survey-item-details">
@@ -26,7 +33,6 @@ function SurveyItem(props) {
             </div>}
         </div>
     </>
-    // console.log(props.survey);
 }
 
 export default SurveyItem;

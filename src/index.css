@@ -20,7 +20,7 @@ body {
   list-style-type: none;
 }
 
-.survey-btn, .surveylist-btn, .survey-item-btn {
+.survey-btn, .surveylist-btn, .details-btn {
   background-color: #751cc9;
   border: none;
   border-radius: 5px;
@@ -32,7 +32,7 @@ body {
   padding: 0.5rem;
 }
 
-.survey-btn:hover, .surveylist-btn:hover, .survey-item-btn:hover {
+.survey-btn:hover, .surveylist-btn:hover {
   background-color: #a64dff;
   cursor: pointer;
 }
@@ -79,7 +79,7 @@ body {
   padding: 0.5rem;
 }
 
-.cancel-btn {
+.cancel-btn, .delete-btn {
   background-color: red;
   border: none;
   border-radius: 5px;
@@ -121,4 +121,11 @@ body {
 .survey-item-heading {
   color: white;
   font-weight: bolder;
+}
+
+.survey-item-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
 }

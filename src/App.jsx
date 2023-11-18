@@ -6,10 +6,12 @@ import SurveyList from "/src/components/SurveyList"
 
 import '/src/App.css'
 
+import { onSnapshot, addDoc, doc, deleteDoc, setDoc, updateDoc } from "firebase/firestore";
 import { surveyCollection, db } from '../firebase'
 
 function App() {
   localStorage.setItem("survey", JSON.stringify([{
+    id: 1,
     firstName: "Anurag",
     lastName: "Peddi",
     streetAddress: "4309F, Ramona Drive",
@@ -24,6 +26,7 @@ function App() {
     recommend: "Yes",
     comments: "Good"
   }, {
+    id: 2,
     firstName: "Theertha",
     lastName: "CT",
     streetAddress: "H.No: 342, Ward No: 17, Cheriyytil, Nadapuram, Kummankode",
@@ -47,6 +50,19 @@ function App() {
     localStorage.setItem("survey", JSON.stringify(surveys))
   }, [surveys])
 
+  useEffect(() => {
+    const unsubscribe = onSnapshot(surveyCollection, function(snapshot) {
+      const surveyArr = snapshot.docs.map(doc => {
+        return { ...doc.data(), id: doc.id }
+      })
+
+      setSurveys(surveyArr)
+      console.log(surveyArr)
+    })
+
+    return unsubscribe
+  }, [])
+
   var appDisplay = <Welcome setIsSurvey={setIsSurvey} />
 
   if (isSurvey === "welcome") {
@@ -55,6 +71,16 @@ function App() {
     appDisplay = <Survey setSurveys={setSurveys} setIsSurvey={setIsSurvey} />
   } else if (isSurvey === "surveylist") {
     appDisplay = <SurveyList setIsSurvey={setIsSurvey} />
+  }
+
+  async function updateSurvey(surveyId) {
+    const docRef = doc(db, "survey", surveyId)
+    await updateDoc(docRef)
+  }
+
+  async function deleteSurvey(surveyId) {
+    const docRef = doc(db, "survey", noteId)
+    await deleteDoc(docRef)
   }
 
   return (

@@ -4,6 +4,7 @@ import "/src/App.css"
 
 function Survey(props) {
     const [userInfo, setUserInfo] = useState({
+        id: 0,
         firstName: "",
         lastName: "",
         streetAddress: "",
