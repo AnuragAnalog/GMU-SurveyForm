@@ -4,13 +4,17 @@ import SurveyItem from "/src/components/SurveyItem";
 
 function SurveyList(props) {
     const surveys = props.surveys
-    const surveyList = surveys.map((survey) => 
-        <SurveyItem survey={survey} />
-    )
-    
+    var surveyList = "No Surveys to display"
+
+    if (surveys.length != 0) {
+        surveyList = surveys.map((survey) => 
+            <SurveyItem survey={survey} />
+        )
+    }
+
     return <>
         {surveyList}
-        <button className="back-btn" onClick={() => props.setIsSurvey("welcome")}> Back </button>
+        <button className="back-btn" onClick={() => props.setIsSurvey("welcome")}> Back to Home </button>
     </>
 }
 

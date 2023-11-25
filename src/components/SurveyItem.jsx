@@ -5,8 +5,8 @@ import "/src/App.css";
 function SurveyItem(props) {
     const [isExpanded, setIsExpanded] = useState(false);
 
-    function deleteSurvey() {
-        console.log("Deleted");
+    function deleteSurvey(id) {
+        props
     }
 
     return <>
@@ -17,7 +17,7 @@ function SurveyItem(props) {
                 <button className="details-btn" onClick={() => setIsExpanded(prevIsExpanded => !prevIsExpanded)}>
                     {isExpanded ? "Hide Details" : "Show Details"}
                 </button>
-                <button className="delete-btn" onClick={deleteSurvey}>
+                <button className="delete-btn" onClick={() => deleteSurvey(props.survey.id)}>
                     Delete
                 </button>
             </div>

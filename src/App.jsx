@@ -11,7 +11,6 @@ import { surveyCollection, db } from '../firebase'
 
 function App() {
   localStorage.setItem("survey", JSON.stringify([{
-    id: 1,
     firstName: "Anurag",
     lastName: "Peddi",
     streetAddress: "4309F, Ramona Drive",
@@ -26,7 +25,6 @@ function App() {
     recommend: "Yes",
     comments: "Good"
   }, {
-    id: 2,
     firstName: "Theertha",
     lastName: "CT",
     streetAddress: "H.No: 342, Ward No: 17, Cheriyytil, Nadapuram, Kummankode",
@@ -43,27 +41,34 @@ function App() {
   }
   ]))
 
-  const tempSurvey = JSON.parse(localStorage.getItem("survey"))
+  // const tempSurvey = JSON.parse(localStorage.getItem("survey"))
   const [isSurvey, setIsSurvey] = useState("welcome")
   const [surveyOper, setSurveyOper] = useState("")
-  const [surveys, setSurveys] = useState(JSON.parse(localStorage.getItem("survey")))
+  const [surveys, setSurveys] = useState([])
   const [surveyId, setSurveyId] = useState(-1)
 
   useEffect(() => {
-    localStorage.setItem("survey", JSON.stringify(surveys))
+    if (surveyOper === "add") {
+      addSurvey()
+    } else if (surveyOper === "update") {
+      console.log("Updated")
+    } else if (surveyOper === "delete") {
+      console.log("Deleted")
+    }
   }, [surveys])
 
-  // useEffect(() => {
-  //   const unsubscribe = onSnapshot(surveyCollection, function(snapshot) {
-  //     const surveyArr = snapshot.docs.map(doc => {
-  //       return { ...doc.data(), id: doc.id }
-  //     })
+  useEffect(() => {
+    const unsubscribe = onSnapshot(surveyCollection, function(snapshot) {
+      const surveyArr = snapshot.docs.map(doc => {
+        return { ...doc.data(), id: doc.id }
+      })
+      console.log(surveyArr)
 
-  //     setSurveys(surveyArr)
-  //   })
+      setSurveys(surveyArr)
+    })
 
-  //   return unsubscribe
-  // }, [])
+    return unsubscribe
+  }, [])
 
   var appDisplay = <Welcome setIsSurvey={setIsSurvey} />
 
@@ -75,7 +80,18 @@ function App() {
                         setIsSurvey={setIsSurvey}
                         setSurveyOper={setSurveyOper}/>
   } else if (isSurvey === "surveylist") {
-    appDisplay = <SurveyList setIsSurvey={setIsSurvey} surveys={surveys} />
+    appDisplay = <SurveyList setIsSurvey={setIsSurvey}
+                            surveys={surveys}
+                            setSurveyOper={setSurveyOper}
+                            setSurveyId={setSurveyId} />
+  }
+
+  async function addSurvey() {
+    const newSurvey = surveys.filter((survey) => survey.id === surveyId)
+    console.log(newSurvey)
+
+    await addDoc(surveyCollection, newSurvey[0])
+    setSurveyId(-1)
   }
 
   async function updateSurvey(surveyId) {
