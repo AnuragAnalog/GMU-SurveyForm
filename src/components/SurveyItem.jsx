@@ -6,7 +6,9 @@ function SurveyItem(props) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     function deleteSurvey(id) {
-        props
+        props.setSurveyOper("delete")
+        props.setSurveyId(id)
+        console.log(id)
     }
 
     return <>

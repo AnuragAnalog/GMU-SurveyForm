@@ -53,7 +53,7 @@ function App() {
     } else if (surveyOper === "update") {
       console.log("Updated")
     } else if (surveyOper === "delete") {
-      console.log("Deleted")
+      deleteSurvey()
     }
   }, [surveys])
 
@@ -99,8 +99,9 @@ function App() {
     await updateDoc(docRef)
   }
 
-  async function deleteSurvey(surveyId) {
+  async function deleteSurvey() {
     const docRef = doc(db, "survey", surveyId)
+    setSurveyId(-1)
     await deleteDoc(docRef)
   }
 
