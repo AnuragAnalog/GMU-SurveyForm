@@ -3,7 +3,7 @@ import "/src/App.css"
 import SurveyItem from "/src/components/SurveyItem";
 
 function SurveyList(props) {
-    const surveys = JSON.parse(localStorage.getItem("survey"))
+    const surveys = props.surveys
     const surveyList = surveys.map((survey) => 
         <SurveyItem survey={survey} />
     )

@@ -43,34 +43,39 @@ function App() {
   }
   ]))
 
+  const tempSurvey = JSON.parse(localStorage.getItem("survey"))
   const [isSurvey, setIsSurvey] = useState("welcome")
-  const [surveys, setSurveys] = useState(localStorage.getItem("survey"))
+  const [surveyOper, setSurveyOper] = useState("")
+  const [surveys, setSurveys] = useState(JSON.parse(localStorage.getItem("survey")))
+  const [surveyId, setSurveyId] = useState(-1)
 
   useEffect(() => {
     localStorage.setItem("survey", JSON.stringify(surveys))
   }, [surveys])
 
-  useEffect(() => {
-    const unsubscribe = onSnapshot(surveyCollection, function(snapshot) {
-      const surveyArr = snapshot.docs.map(doc => {
-        return { ...doc.data(), id: doc.id }
-      })
+  // useEffect(() => {
+  //   const unsubscribe = onSnapshot(surveyCollection, function(snapshot) {
+  //     const surveyArr = snapshot.docs.map(doc => {
+  //       return { ...doc.data(), id: doc.id }
+  //     })
 
-      setSurveys(surveyArr)
-      console.log(surveyArr)
-    })
+  //     setSurveys(surveyArr)
+  //   })
 
-    return unsubscribe
-  }, [])
+  //   return unsubscribe
+  // }, [])
 
   var appDisplay = <Welcome setIsSurvey={setIsSurvey} />
 
   if (isSurvey === "welcome") {
     appDisplay = <Welcome setIsSurvey={setIsSurvey} />
   } else if (isSurvey === "survey") {
-    appDisplay = <Survey setSurveys={setSurveys} setIsSurvey={setIsSurvey} />
+    appDisplay = <Survey setSurveys={setSurveys} 
+                        setSurveyId={setSurveyId}
+                        setIsSurvey={setIsSurvey}
+                        setSurveyOper={setSurveyOper}/>
   } else if (isSurvey === "surveylist") {
-    appDisplay = <SurveyList setIsSurvey={setIsSurvey} />
+    appDisplay = <SurveyList setIsSurvey={setIsSurvey} surveys={surveys} />
   }
 
   async function updateSurvey(surveyId) {
@@ -79,7 +84,7 @@ function App() {
   }
 
   async function deleteSurvey(surveyId) {
-    const docRef = doc(db, "survey", noteId)
+    const docRef = doc(db, "survey", surveyId)
     await deleteDoc(docRef)
   }
 
