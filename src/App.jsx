@@ -41,7 +41,7 @@ function App() {
   }
   ]))
 
-  // const tempSurvey = JSON.parse(localStorage.getItem("survey"))
+  var surveyIds = []
   const [isSurvey, setIsSurvey] = useState("welcome")
   const [surveyOper, setSurveyOper] = useState("")
   const [surveys, setSurveys] = useState([])
@@ -62,7 +62,10 @@ function App() {
       const surveyArr = snapshot.docs.map(doc => {
         return { ...doc.data(), id: doc.id }
       })
-      console.log(surveyArr)
+
+      surveyIds = surveyArr.map((survey) => {
+        return survey.id
+      })
 
       setSurveys(surveyArr)
     })
@@ -78,7 +81,7 @@ function App() {
     appDisplay = <Survey setSurveys={setSurveys} 
                         setSurveyId={setSurveyId}
                         setIsSurvey={setIsSurvey}
-                        setSurveyOper={setSurveyOper}/>
+                        setSurveyOper={setSurveyOper} />
   } else if (isSurvey === "surveylist") {
     appDisplay = <SurveyList setIsSurvey={setIsSurvey}
                             surveys={surveys}
@@ -87,11 +90,16 @@ function App() {
   }
 
   async function addSurvey() {
-    const newSurvey = surveys.filter((survey) => survey.id === surveyId)
-    console.log(newSurvey)
+    for (var i; i < surveys.length; i++) {
+        if (!surveyIds.includes(surveys[i].id)) {
+          await addDoc(surveyCollection, surveys[i])
+        }
+    }
+    // const newSurvey = surveys.filter((survey) => survey.id === surveyId)
+    // console.log(newSurvey)
 
-    await addDoc(surveyCollection, newSurvey[0])
-    setSurveyId(-1)
+    // await addDoc(surveyCollection, newSurvey[0])
+    // setSurveyId(-1)
   }
 
   async function updateSurvey(surveyId) {

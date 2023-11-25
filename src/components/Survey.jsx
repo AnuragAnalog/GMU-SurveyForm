@@ -5,7 +5,7 @@ import "/src/App.css"
 
 function Survey(props) {
     const [userInfo, setUserInfo] = useState({
-        id: -1,
+        // id: -1,
         firstName: "",
         lastName: "",
         streetAddress: "",
@@ -25,9 +25,9 @@ function Survey(props) {
         const { name, value } = event.target
 
         setUserInfo(prevUserInfo => {
-            if (prevUserInfo.id === -1) {
-                prevUserInfo.id = nanoid()
-            }
+            // if (prevUserInfo.id === -1) {
+            //     prevUserInfo.id = nanoid()
+            // }
 
             return {
                 ...prevUserInfo,
@@ -39,7 +39,7 @@ function Survey(props) {
     function handleSubmit(event) {
         event.preventDefault()
         props.setSurveys(prevSurveys => [...prevSurveys, userInfo])
-        props.setSurveyId(userInfo.id)
+        // props.setSurveyId(userInfo.id)
         props.setSurveyOper("add")
         event.target.reset()
     }
