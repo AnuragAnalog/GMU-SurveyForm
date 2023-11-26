@@ -6,19 +6,15 @@ import SurveyList from "/src/components/SurveyList"
 
 import '/src/App.css'
 
-import { onSnapshot, doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { onSnapshot, doc, updateDoc } from "firebase/firestore";
 import { surveyCollection, db } from '../firebase'
 
 function App() {
   const [isSurvey, setIsSurvey] = useState("welcome")
-  const [surveyOper, setSurveyOper] = useState("")
   const [surveys, setSurveys] = useState([])
-  const [surveyId, setSurveyId] = useState(-1)
 
   useEffect(() => {
-    if (surveyOper === "update") {
-      console.log("Updated")
-    }
+    console.log(surveys)
   }, [surveys])
 
   useEffect(() => {
@@ -38,10 +34,8 @@ function App() {
   if (isSurvey === "welcome") {
     appDisplay = <Welcome setIsSurvey={setIsSurvey} />
   } else if (isSurvey === "survey") {
-    appDisplay = <Survey setSurveys={setSurveys} 
-                        setSurveyId={setSurveyId}
-                        setIsSurvey={setIsSurvey}
-                        setSurveyOper={setSurveyOper} />
+    appDisplay = <Survey setSurveys={setSurveys}
+                        setIsSurvey={setIsSurvey} />
   } else if (isSurvey === "surveylist") {
     appDisplay = <SurveyList setIsSurvey={setIsSurvey}
                             surveys={surveys} />

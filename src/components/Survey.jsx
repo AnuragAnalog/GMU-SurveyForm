@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { nanoid } from "nanoid"
 
 import { addDoc } from "firebase/firestore";
 import { surveyCollection } from '../../firebase'
