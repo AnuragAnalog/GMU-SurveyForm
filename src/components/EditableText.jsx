@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import "/src/App.css";
+
 function EditableText(props) {
     const [isEditable, setIsEditable] = useState(false);
     const [text, setText] = useState(props.text)
@@ -21,7 +23,7 @@ function EditableText(props) {
 
     return (
         <>
-            <div onDoubleClick={handleDoubleClick}>
+            <div className="editable" onDoubleClick={handleDoubleClick}>
                 {isEditable ? (
                     <input
                         type="text"

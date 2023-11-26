@@ -76,6 +76,8 @@ function SurveyItem(props) {
                 <EditableText 
                         text={props.survey.lastName}
                         updateText={changeLastName} />
+            </p>
+            <p className="survey-item-element">
                 <EditableText 
                         text={props.survey.dateOfSurvey}
                         updateText={changeDateOfSurvey} />
@@ -94,6 +96,8 @@ function SurveyItem(props) {
                     <EditableText
                             text={props.survey.streetAddress}
                             updateText={changeStreetAddress} />
+                </p>
+                <p className="survey-item-element">
                     <EditableText
                             text={props.survey.city}
                             updateText={changeCity} />
@@ -103,21 +107,27 @@ function SurveyItem(props) {
                     <EditableText
                             text={props.survey.zipCode}
                             updateText={changeZipCode} />
+                </p>
+                <p className="survey-item-element">
                     <EditableText
                             text={props.survey.phoneNumber}
                             updateText={changePhoneNumber} />
                     <EditableText
                             text={props.survey.email}
                             updateText={changeEmail} />
-                    <EditableText 
+                </p>
+                <p className="survey-item-element">
+                    <EditableText
                             text={props.survey.campus}
                             updateText={changeCampus} />
-                    <EditableText 
+                    <EditableText
                             text={props.survey.interest}
                             updateText={changeInterest} />
-                    <EditableText 
+                    <EditableText
                             text={props.survey.recommend}
                             updateText={changeRecommend} />
+                </p>
+                <p className="survey-item-element">
                     <EditableText 
                             text={props.survey.comments}
                             updateText={changeComments} />
