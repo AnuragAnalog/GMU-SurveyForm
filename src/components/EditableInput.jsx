@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import "/src/App.css";
 
-function EditableText(props) {
+function EditableInput(props) {
     const [isEditable, setIsEditable] = useState(false);
     const [text, setText] = useState(props.text)
 
@@ -26,7 +26,7 @@ function EditableText(props) {
             <div className="editable" onDoubleClick={handleDoubleClick}>
                 {isEditable ? (
                     <input
-                        type="text"
+                        type={props.updateType}
                         value={text}
                         onChange={handleChange}
                         onBlur={onChangeBlur}>
@@ -36,4 +36,4 @@ function EditableText(props) {
     )
 }
 
-export default EditableText
+export default EditableInput

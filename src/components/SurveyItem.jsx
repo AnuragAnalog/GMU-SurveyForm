@@ -1,65 +1,74 @@
 import { useEffect, useState } from "react";
 
-import EditableText from "/src/components/EditableText"
-import { doc, deleteDoc } from "firebase/firestore"
+import EditableInput from "/src/components/EditableInput"
+import { doc, setDoc, deleteDoc } from "firebase/firestore"
 import { db } from '../../firebase'
 
 import "/src/App.css";
 
 function SurveyItem(props) {
-    var { survey } = props
+    const [data, setData] = useState(props.survey)
     const [isExpanded, setIsExpanded] = useState(false);
 
+    useEffect(() => {
+        updateSurvey(data)
+    }, [data])
+
+    async function updateSurvey(survey) {
+        const docRef = doc(db, "survey", survey["id"])
+        await setDoc(docRef, survey, { merge: true })
+    }
+
     function changeFirstName(firstName) {
-        survey["firstName"] = firstName
+        setData({ ...data, "firstName": firstName})
     }
 
     function changeLastName(lastName) {
-        survey["lastName"] = lastName
+        setData({ ...data, "lastName": lastName})
     }
 
     function changeDateOfSurvey(dateOfSurvey) {
-        survey["dateOfSurvey"] = dateOfSurvey
+        setData({ ...data, "dateOfSurvey": dateOfSurvey})
     }
 
     function changeStreetAddress(streetAddress) {
-        survey["streetAddress"] = streetAddress
+        setData({ ...data, "streetAddress": streetAddress})
     }
 
     function changeCity(city) {
-        survey["city"] = city
+        setData({ ...data, "city": city})
     }
 
     function changeState(state) {
-        survey["state"]
+        setData({ ...data, "state": state})
     }
 
     function changeZipCode(zipCode) {
-        survey["zipCode"] = zipCode
+        setData({ ...data, "zipCode": zipCode})
     }
 
     function changePhoneNumber(phoneNumber) {
-        survey["phoneNumber"] = phoneNumber
+        setData({ ...data, "phoneNumber": phoneNumber})
     }
 
     function changeEmail(email) {
-        survey["email"] = email
+        setData({ ...data, "email": email})
     }
 
     function changeCampus(campus) {
-        survey["campus"] = campus
+        setData({ ...data, "campus": campus})
     }
 
     function changeInterest(interest) {
-        survey["interest"] = interest
+        setData({ ...data, "interest": interest})
     }
 
     function changeRecommend(recommend) {
-        survey["recommend"] = recommend
+        setData({ ...data, "recommend": recommend})
     }
 
     function changeComments(comments) {
-        survey["comments"] = comments
+        setData({ ...data, "comments": comments})
     }
 
     async function deleteSurvey(surveyId) {
@@ -70,17 +79,20 @@ function SurveyItem(props) {
     return <>
         <div className="survey-item">
             <p className="survey-item-element">
-                <EditableText 
+                <EditableInput 
                         text={props.survey.firstName}
-                        updateText={changeFirstName} /> 
-                <EditableText 
+                        updateValue={changeFirstName}
+                        updateType="text" /> 
+                <EditableInput 
                         text={props.survey.lastName}
-                        updateText={changeLastName} />
+                        updateValue={changeLastName}
+                        updateType="text" />
             </p>
             <p className="survey-item-element">
-                <EditableText 
+                <EditableInput 
                         text={props.survey.dateOfSurvey}
-                        updateText={changeDateOfSurvey} />
+                        updateValue={changeDateOfSurvey}
+                        updateType="date" />
             </p>
             <div className="survey-item-buttons">
                 <button className="details-btn" onClick={() => setIsExpanded(prevIsExpanded => !prevIsExpanded)}>
@@ -93,44 +105,54 @@ function SurveyItem(props) {
             {isExpanded && <div className="survey-item-details">
                 <h3 className="survey-item-heading"> Survey Details </h3>
                 <p className="survey-item-element">
-                    <EditableText
+                    <EditableInput
                             text={props.survey.streetAddress}
-                            updateText={changeStreetAddress} />
+                            updateValue={changeStreetAddress}
+                            updateType="text" />
                 </p>
                 <p className="survey-item-element">
-                    <EditableText
+                    <EditableInput
                             text={props.survey.city}
-                            updateText={changeCity} />
-                    <EditableText
+                            updateValue={changeCity}
+                            updateType="text" />
+                    <EditableInput
                             text={props.survey.state}
-                            updateText={changeState} />
-                    <EditableText
+                            updateValue={changeState}
+                            updateType="text" />
+                    <EditableInput
                             text={props.survey.zipCode}
-                            updateText={changeZipCode} />
+                            updateValue={changeZipCode}
+                            updateType="number" />
                 </p>
                 <p className="survey-item-element">
-                    <EditableText
+                    <EditableInput
                             text={props.survey.phoneNumber}
-                            updateText={changePhoneNumber} />
-                    <EditableText
+                            updateValue={changePhoneNumber}
+                            updateType="number" />
+                    <EditableInput
                             text={props.survey.email}
-                            updateText={changeEmail} />
+                            updateValue={changeEmail}
+                            updateType="email" />
                 </p>
                 <p className="survey-item-element">
-                    <EditableText
+                    <EditableInput
                             text={props.survey.campus}
-                            updateText={changeCampus} />
-                    <EditableText
+                            updateValue={changeCampus}
+                            updateType="text" />
+                    <EditableInput
                             text={props.survey.interest}
-                            updateText={changeInterest} />
-                    <EditableText
+                            updateValue={changeInterest}
+                            updateType="text" />
+                    <EditableInput
                             text={props.survey.recommend}
-                            updateText={changeRecommend} />
+                            updateValue={changeRecommend}
+                            updateType="text" />
                 </p>
                 <p className="survey-item-element">
-                    <EditableText 
+                    <EditableInput 
                             text={props.survey.comments}
-                            updateText={changeComments} />
+                            updateValue={changeComments}
+                            updateType="text" />
                 </p>
             </div>}
         </div>
