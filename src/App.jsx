@@ -38,6 +38,7 @@ function App() {
                         setIsSurvey={setIsSurvey} />
   } else if (isSurvey === "surveylist") {
     appDisplay = <SurveyList setIsSurvey={setIsSurvey}
+                            setSurveys={setSurveys}
                             surveys={surveys} />
   }
 
