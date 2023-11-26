@@ -1,14 +1,16 @@
 import { useState } from "react";
 
+import { doc, deleteDoc } from "firebase/firestore";
+import { db } from '../../firebase'
+
 import "/src/App.css";
 
 function SurveyItem(props) {
     const [isExpanded, setIsExpanded] = useState(false);
 
-    function deleteSurvey(id) {
-        props.setSurveyOper("delete")
-        props.setSurveyId(id)
-        console.log(id)
+    async function deleteSurvey(surveyId) {
+        const docRef = doc(db, "survey", surveyId)
+        await deleteDoc(docRef)
     }
 
     return <>

@@ -8,9 +8,7 @@ function SurveyList(props) {
 
     if (surveys.length != 0) {
         surveyList = surveys.map((survey) => 
-            <SurveyItem survey={survey}
-                        setSurveyId={props.setSurveyId}
-                        setSurveyOper={props.setSurveyOper}/>
+            <SurveyItem survey={survey} />
         )
     }
 
