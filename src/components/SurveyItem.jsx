@@ -90,40 +90,38 @@ function SurveyItem(props) {
             </div>
             {isExpanded && <div className="survey-item-details">
                 <h3 className="survey-item-heading"> Survey Details </h3>
-                {/* <p className="survey-item-element"> {props.survey.streetAddress} </p>
-                <p className="survey-item-element"> {props.survey.city}, {props.survey.state} {props.survey.zipCode} </p>
-                <p className="survey-item-element"> {props.survey.phoneNumber}, {props.survey.email} </p>
-                <p className="survey-item-element"> {props.survey.campus} </p>
-                <p className="survey-item-element"> {props.survey.interest} </p>
-                <p className="survey-item-element"> {props.survey.recommend} </p>
-                <p className="survey-item-element"> {props.survey.comments} </p> */}
-                <EditableText
-                        text={props.survey.streetAddress}
-                        updateText={changeStreetAddress} />
-                <EditableText
-                        text={props.survey.city}
-                        updateText={changeCity} />
-                <EditableText
-                        text={props.survey.state}
-                        updateText={changeState} />
-                <EditableText
-                        text={props.survey.phoneNumber}
-                        updateText={changePhoneNumber} />
-                <EditableText
-                        text={props.survey.email}
-                        updateText={changeEmail} />
-                <EditableText 
-                        text={props.survey.campus}
-                        updateText={changeCampus} />
-                <EditableText 
-                        text={props.survey.interest}
-                        updateText={changeInterest} />
-                <EditableText 
-                        text={props.survey.recommend}
-                        updateText={changeRecommend} />
-                <EditableText 
-                        text={props.survey.comments}
-                        updateText={changeComments} />
+                <p className="survey-item-element">
+                    <EditableText
+                            text={props.survey.streetAddress}
+                            updateText={changeStreetAddress} />
+                    <EditableText
+                            text={props.survey.city}
+                            updateText={changeCity} />
+                    <EditableText
+                            text={props.survey.state}
+                            updateText={changeState} />
+                    <EditableText
+                            text={props.survey.zipCode}
+                            updateText={changeZipCode} />
+                    <EditableText
+                            text={props.survey.phoneNumber}
+                            updateText={changePhoneNumber} />
+                    <EditableText
+                            text={props.survey.email}
+                            updateText={changeEmail} />
+                    <EditableText 
+                            text={props.survey.campus}
+                            updateText={changeCampus} />
+                    <EditableText 
+                            text={props.survey.interest}
+                            updateText={changeInterest} />
+                    <EditableText 
+                            text={props.survey.recommend}
+                            updateText={changeRecommend} />
+                    <EditableText 
+                            text={props.survey.comments}
+                            updateText={changeComments} />
+                </p>
             </div>}
         </div>
     </>
