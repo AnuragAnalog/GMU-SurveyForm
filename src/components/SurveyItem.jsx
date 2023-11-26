@@ -19,58 +19,6 @@ function SurveyItem(props) {
         await setDoc(docRef, survey, { merge: true })
     }
 
-    function changeFirstName(firstName) {
-        setData({ ...data, "firstName": firstName})
-    }
-
-    function changeLastName(lastName) {
-        setData({ ...data, "lastName": lastName})
-    }
-
-    function changeDateOfSurvey(dateOfSurvey) {
-        setData({ ...data, "dateOfSurvey": dateOfSurvey})
-    }
-
-    function changeStreetAddress(streetAddress) {
-        setData({ ...data, "streetAddress": streetAddress})
-    }
-
-    function changeCity(city) {
-        setData({ ...data, "city": city})
-    }
-
-    function changeState(state) {
-        setData({ ...data, "state": state})
-    }
-
-    function changeZipCode(zipCode) {
-        setData({ ...data, "zipCode": zipCode})
-    }
-
-    function changePhoneNumber(phoneNumber) {
-        setData({ ...data, "phoneNumber": phoneNumber})
-    }
-
-    function changeEmail(email) {
-        setData({ ...data, "email": email})
-    }
-
-    function changeCampus(campus) {
-        setData({ ...data, "campus": campus})
-    }
-
-    function changeInterest(interest) {
-        setData({ ...data, "interest": interest})
-    }
-
-    function changeRecommend(recommend) {
-        setData({ ...data, "recommend": recommend})
-    }
-
-    function changeComments(comments) {
-        setData({ ...data, "comments": comments})
-    }
-
     async function deleteSurvey(surveyId) {
         const docRef = doc(db, "survey", surveyId)
         await deleteDoc(docRef)
@@ -80,18 +28,21 @@ function SurveyItem(props) {
         <div className="survey-item">
             <p className="survey-item-element">
                 <EditableInput 
-                        text={props.survey.firstName}
-                        updateValue={changeFirstName}
+                        survey={data}
+                        updateFunc={setData}
+                        updateName="firstName"
                         updateType="text" /> 
                 <EditableInput 
-                        text={props.survey.lastName}
-                        updateValue={changeLastName}
+                        survey={data}
+                        updateFunc={setData}
+                        updateName="lastName"
                         updateType="text" />
             </p>
             <p className="survey-item-element">
                 <EditableInput 
-                        text={props.survey.dateOfSurvey}
-                        updateValue={changeDateOfSurvey}
+                        survey={data}
+                        updateFunc={setData}
+                        updateName="dateOfSurvey"
                         updateType="date" />
             </p>
             <div className="survey-item-buttons">
@@ -106,52 +57,62 @@ function SurveyItem(props) {
                 <h3 className="survey-item-heading"> Survey Details </h3>
                 <p className="survey-item-element">
                     <EditableInput
-                            text={props.survey.streetAddress}
-                            updateValue={changeStreetAddress}
+                            survey={data}
+                            updateFunc={setData}
+                            updateName="streetAddress"
                             updateType="text" />
                 </p>
                 <p className="survey-item-element">
                     <EditableInput
-                            text={props.survey.city}
-                            updateValue={changeCity}
+                            survey={data}
+                            updateFunc={setData}
+                            updateName="city"
                             updateType="text" />
                     <EditableInput
-                            text={props.survey.state}
-                            updateValue={changeState}
+                            survey={data}
+                            updateFunc={setData}
+                            updateName="state"
                             updateType="text" />
                     <EditableInput
-                            text={props.survey.zipCode}
-                            updateValue={changeZipCode}
+                            survey={data}
+                            updateFunc={setData}
+                            updateName="zipCode"
                             updateType="number" />
                 </p>
                 <p className="survey-item-element">
                     <EditableInput
-                            text={props.survey.phoneNumber}
-                            updateValue={changePhoneNumber}
+                            survey={data}
+                            updateFunc={setData}
+                            updateName="phoneNumber"
                             updateType="number" />
                     <EditableInput
-                            text={props.survey.email}
-                            updateValue={changeEmail}
+                            survey={data}
+                            updateFunc={setData}
+                            updateName="email"
                             updateType="email" />
                 </p>
                 <p className="survey-item-element">
                     <EditableInput
-                            text={props.survey.campus}
-                            updateValue={changeCampus}
+                            survey={data}
+                            updateFunc={setData}
+                            updateName="campus"
                             updateType="text" />
                     <EditableInput
-                            text={props.survey.interest}
-                            updateValue={changeInterest}
+                            survey={data}
+                            updateFunc={setData}
+                            updateName="interest"
                             updateType="text" />
                     <EditableInput
-                            text={props.survey.recommend}
-                            updateValue={changeRecommend}
+                            survey={data}
+                            updateFunc={setData}
+                            updateName="recommend"
                             updateType="text" />
                 </p>
                 <p className="survey-item-element">
                     <EditableInput 
-                            text={props.survey.comments}
-                            updateValue={changeComments}
+                            survey={data}
+                            updateFunc={setData}
+                            updateName="comments"
                             updateType="text" />
                 </p>
             </div>}
