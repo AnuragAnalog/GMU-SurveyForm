@@ -6,16 +6,12 @@ import SurveyList from "/src/components/SurveyList"
 
 import '/src/App.css'
 
-import { onSnapshot, doc, updateDoc } from "firebase/firestore";
-import { surveyCollection, db } from '../firebase'
+import { onSnapshot } from "firebase/firestore";
+import { surveyCollection } from '../firebase'
 
 function App() {
   const [isSurvey, setIsSurvey] = useState("welcome")
   const [surveys, setSurveys] = useState([])
-
-  useEffect(() => {
-    console.log(surveys)
-  }, [surveys])
 
   useEffect(() => {
     const unsubscribe = onSnapshot(surveyCollection, function(snapshot) {
@@ -40,11 +36,6 @@ function App() {
     appDisplay = <SurveyList setIsSurvey={setIsSurvey}
                             setSurveys={setSurveys}
                             surveys={surveys} />
-  }
-
-  async function updateSurvey(surveyId) {
-    const docRef = doc(db, "survey", surveyId)
-    await updateDoc(docRef)
   }
 
   return (

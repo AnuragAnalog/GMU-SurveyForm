@@ -41,9 +41,3 @@ function EditableInput(props) {
 }
 
 export default EditableInput
-
-// <EditableInput 
-// survey={props.survey}
-// updateFunc={setData}
-// updateName="firstName"
-// updateType="text" /> 
