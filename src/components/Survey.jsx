@@ -1,12 +1,16 @@
+// Importing necessary hooks and components from React and Firebase
 import { useState } from "react"
-
 import { addDoc } from "firebase/firestore";
 import { surveyCollection } from '../../firebase'
 
+// Importing a CSS file for styling (assuming it contains styles for this component)
 import "/src/App.css"
 
+// Functional component named Survey
 function Survey(props) {
+    // State variable using the useState hook to manage user information for the survey
     const [userInfo, setUserInfo] = useState({
+        // Initial state object with various fields for survey information
         firstName: "",
         lastName: "",
         streetAddress: "",
@@ -20,31 +24,43 @@ function Survey(props) {
         interest: "",
         recommend: "",
         comments: ""
-      })
+    })
 
+    // Function to handle changes in form input fields
     function handleChange(event) {
+        // Extracting 'name' and 'value' from the input field
         const { name, value } = event.target
 
+        // Updating the 'userInfo' state using functional updates
         setUserInfo(prevUserInfo => {
             return {
                 ...prevUserInfo,
-                [name]: value
+                [name]: value // Updating the field specified by 'name' with the provided 'value'
             }
         })
     }
 
+    // Asynchronous function to add a survey to the Firestore database
     async function addSurvey(newSurvey) {
-        await addDoc(surveyCollection, newSurvey)
+        await addDoc(surveyCollection, newSurvey) // Adding the new survey to Firestore
     }
 
+    // Function to handle form submission
     function handleSubmit(event) {
-        event.preventDefault()
+        event.preventDefault() // Preventing the default form submission behavior
+
+        // Updating the surveys state in the parent component using 'setSurveys'
         props.setSurveys(prevSurveys => [...prevSurveys, userInfo])
+
+        // Adding the survey to the Firestore database
         addSurvey(userInfo)
-        event.target.reset()
+
+        event.target.reset() // Resetting the form after submission
     }
 
+    // Function to reset the form fields
     function resetForm() {
+        // Resetting the 'userInfo' state to clear all form fields
         setUserInfo({
             firstName: "",
             lastName: "",

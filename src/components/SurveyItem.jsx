@@ -1,27 +1,33 @@
+// Importing necessary hooks and components from React and Firebase
 import { useEffect, useState } from "react";
-
 import EditableInput from "/src/components/EditableInput"
 import { doc, setDoc, deleteDoc } from "firebase/firestore"
 import { db } from '../../firebase'
 
+// Importing a CSS file for styling (assuming it contains styles for this component)
 import "/src/App.css";
 
+// Functional component named SurveyItem, taking props as input
 function SurveyItem(props) {
-    const [data, setData] = useState(props.survey)
-    const [isExpanded, setIsExpanded] = useState(false);
+    // State variables using the useState hook
+    const [data, setData] = useState(props.survey) // State to manage survey data
+    const [isExpanded, setIsExpanded] = useState(false); // State to manage expansion status
 
+    // useEffect hook to perform actions when 'data' changes
     useEffect(() => {
-        updateSurvey(data)
+        updateSurvey(data); // Calls updateSurvey function when 'data' changes
     }, [data])
 
+    // Asynchronous function to update the survey in the Firestore database
     async function updateSurvey(survey) {
-        const docRef = doc(db, "survey", survey["id"])
-        await setDoc(docRef, survey, { merge: true })
+        const docRef = doc(db, "survey", survey["id"]); // Reference to the Firestore document
+        await setDoc(docRef, survey, { merge: true }); // Updates the document with survey data
     }
 
+    // Asynchronous function to delete a survey from the Firestore database
     async function deleteSurvey(surveyId) {
-        const docRef = doc(db, "survey", surveyId)
-        await deleteDoc(docRef)
+        const docRef = doc(db, "survey", surveyId); // Reference to the Firestore document
+        await deleteDoc(docRef); // Deletes the document with the given surveyId
     }
 
     return <>
