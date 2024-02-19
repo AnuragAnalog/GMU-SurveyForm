@@ -5,6 +5,13 @@ and video-record the details of your implementation. Create a power point slide
 using the React concepts that you used in the React implementation, including
 screenshots of your React code.
 
+## Team Members
+
+* Anurag Peddi
+* Manideep Akula
+* Akash Ponnam
+* Shiva Myneni
+
 Submit a zip file containing:
 * React application code
 * Detailed documentation explaining your design, how to run the project, and other relevant information.
